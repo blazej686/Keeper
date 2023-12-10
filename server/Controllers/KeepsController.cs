@@ -23,7 +23,7 @@ namespace Keeper.Controllers
             try
             {
                 List<Keep> keeps = _keepsService.GetKeeps();
-                return keeps;
+                return Ok(keeps);
             }
             catch (Exception e)
             {
@@ -38,7 +38,7 @@ namespace Keeper.Controllers
             try
             {
                 Keep keep = _keepsService.GetKeepById(keepId);
-                return keep;
+                return Ok(keep);
             }
             catch (Exception e)
             {
