@@ -33,11 +33,11 @@ namespace Keeper.Controllers
         }
 
         [HttpGet("{keepId}")]
-        public ActionResult<Keep> GetKeepById(int keepId)
+        public ActionResult<Keep> GetKeepByIdAndIncreaseViews(int keepId)
         {
             try
             {
-                Keep keep = _keepsService.GetKeepById(keepId);
+                Keep keep = _keepsService.GetKeepByIdAndIncreaseViews(keepId);
                 return Ok(keep);
             }
             catch (Exception e)

@@ -89,7 +89,8 @@ JOIN accounts acc ON acc.id = keeps.creatorId;";
 UPDATE keeps
 SET
 name = @Name,
-description = @Description
+description = @Description,
+views = @Views
 WHERE id = @Id LIMIT 1;
 
 SELECT
