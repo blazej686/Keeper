@@ -16,6 +16,7 @@ import { keepsService } from '../services/KeepsService.js';
 import Pop from '../utils/Pop.js';
 import { AppState } from '../AppState.js';
 import KeepCard from '../components/KeepCard.vue';
+import { vaultsService } from '../services/VaultsService.js'
 
 
 export default {
@@ -29,14 +30,28 @@ export default {
         Pop.error(error)
       }
     }
+
+    // async function getVaults() {
+    //   try {
+    //     const userId = account.id
+    //     await vaultsService.getVaults(userId);
+    //   }
+    //   catch (error) {
+    //     Pop.error(error)
+    //   }
+
+    // }
+
     onMounted(() => {
       getKeeps();
+      // getVaults();
 
     });
 
 
     return {
-      keeps: computed(() => AppState.keeps)
+      keeps: computed(() => AppState.keeps),
+      account: computed(() => AppState.account),
     }
   }
 }

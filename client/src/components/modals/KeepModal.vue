@@ -22,8 +22,10 @@
                                 <div>
                                     <h4>{{ activeKeep.name }}</h4>
                                     <p>{{ activeKeep.description }}</p>
-                                </div>
 
+                                    <img class="rounded profile-pic" :src="activeKeep.img" alt="">
+
+                                </div>
                             </div>
                         </section>
                     </div>
@@ -34,9 +36,8 @@
                                 Vaults
                             </button>
                             <ul class="dropdown-menu">
-                                <li><button @click="" class="dropdown-item">Action</button></li>
-                                <li><button class="dropdown-item">Another action</button></li>
-                                <li><button class="dropdown-item">Something else here</button></li>
+                                <li v-for="vault in vaults" :key="vault.id"><button @click="" class="dropdown-item">{{
+                                    vault.name }}</button></li>
                             </ul>
                         </div>
                     </form>
@@ -55,12 +56,21 @@ import { AppState } from '../../AppState.js';
 
 export default {
     setup() {
+
+
         return {
-            activeKeep: computed(() => AppState.activeKeep)
+            activeKeep: computed(() => AppState.activeKeep),
+            vaults: computed(() => AppState.userVaults),
         }
     }
 };
 </script>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.profile-pic {
+    object-fit: cover;
+    object-position: center;
+    height: 5vh;
+}
+</style>
