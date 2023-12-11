@@ -16,7 +16,7 @@
                             </div>
                             <div class="col-6">
                                 <div>
-                                    <p>views 0</p>
+                                    <p>Views {{ activeKeep.views }}</p>
                                     <p>kept 0</p>
                                 </div>
                                 <div>

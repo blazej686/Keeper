@@ -1,8 +1,8 @@
 <template>
     <div class="rounded shadow">
-        <div @click="setActiveKeep(keep.id)" class=" d-flex justify-content-between rounded align-items-end p-3"
+        <div @click="setActiveKeep(keep.id)" class=" d-flex justify-content-between rounded align-items-end p-3 img-fluid"
             type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-            :style="{ backgroundImage: `url('${keep.img}')`, backgroundPosition: 'center', backgroundSize: 'cover', height: '30vh' }">
+            :style="{ backgroundImage: `url('${keep.img}')`, backgroundPosition: 'center', backgroundSize: 'cover' }">
             <p class="glass text-light m-0 p-2">
                 {{ keep.name }}
             </p>

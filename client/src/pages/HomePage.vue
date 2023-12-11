@@ -1,8 +1,10 @@
 <template>
   <div class="container">
     <section class="row">
-      <div v-for="keep in keeps" :key="keep.id" class="col-6 col-md-3 mb-3 boarder rounded">
-        <KeepCard :keep="keep" />
+      <div class="masonry">
+        <div v-for="keep in keeps" :key="keep.id" class=" col-6 col-md-3 mb-3 boarder rounded w-100">
+          <KeepCard :keep="keep" />
+        </div>
       </div>
     </section>
   </div>
@@ -40,4 +42,8 @@ export default {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.masonry {
+  columns: 200px;
+}
+</style>
