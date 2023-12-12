@@ -1,3 +1,5 @@
+import { AppState } from "../AppState.js"
+import { Vault } from "../models/Vault.js"
 import { api } from "./AxiosService.js"
 
 class VaultsService {
@@ -7,6 +9,12 @@ class VaultsService {
         const res = await api.get('api/')
 
     }
+
+    async createVault(vaultData) {
+        const res = await api.post('api/vaults', vaultData)
+        AppState.vaults.push(new Vault(res.data))
+    }
+
 }
 
 export const vaultsService = new VaultsService()

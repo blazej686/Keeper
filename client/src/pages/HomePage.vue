@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { keepsService } from '../services/KeepsService.js';
 import Pop from '../utils/Pop.js';
 import { AppState } from '../AppState.js';
@@ -21,7 +21,16 @@ import { vaultsService } from '../services/VaultsService.js'
 
 export default {
   components: { KeepCard },
+
   setup() {
+    const watchable = computed(() => AppState.keeps);
+
+    watch(watchable, () => {
+      getKeeps();
+
+    }, { immediate: true })
+
+
     async function getKeeps() {
       try {
         await keepsService.getKeeps();
@@ -43,7 +52,6 @@ export default {
     // }
 
     onMounted(() => {
-      getKeeps();
       // getVaults();
 
     });

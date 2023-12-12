@@ -7,13 +7,15 @@
             <img alt="logo" src="../assets/img/keeper-logo.png" height="45" />
           </div>
         </router-link>
-        <button v-if="account.id" class="btn btn-secondary text-light lighten-30 dropdown-toggle" type="button"
-          id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Create<i class="mdi mdi-dropdown"></i>
-        </button>
-        <div class="dropdown-menu dropdown-menu-start" aria-labelledby="triggerId">
-          <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createKeepModal">Create Keep</button>
-          <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editKeepModal">Create Vault</button>
+        <div>
+          <button v-if="account.id" class="btn btn-secondary text-light lighten-30 dropdown-toggle" type="button"
+            id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Create<i class="mdi mdi-dropdown"></i>
+          </button>
+          <div class="dropdown-menu dropdown-menu-start" aria-labelledby="triggerId">
+            <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createKeepModal">Create Keep</button>
+            <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createVaultModal">Create Vault</button>
+          </div>
         </div>
       </div>
     </div>
@@ -37,9 +39,10 @@ import { computed, onMounted, ref } from 'vue';
 import { loadState, saveState } from '../utils/Store.js';
 import Login from './Login.vue';
 import { AppState } from '../AppState.js';
+import { useRoute } from 'vue-router';
 export default {
   setup() {
-
+    const route = useRoute();
     const theme = ref(loadState('theme') || 'light')
 
     onMounted(() => {
@@ -47,6 +50,7 @@ export default {
     })
 
     return {
+      route,
       theme,
       account: computed(() => AppState.account),
       toggleTheme() {

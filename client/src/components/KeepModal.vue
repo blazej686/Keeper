@@ -37,7 +37,7 @@
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                Vaults
+                                Add to Vault
                             </button>
                             <ul class="dropdown-menu">
                                 <li v-for="vault in vaults" :key="vault.id"><button @click="" class="dropdown-item">{{
@@ -45,6 +45,9 @@
                             </ul>
                         </div>
                     </form>
+                    <div class="text-end">
+                        <button @click="destroyKeep(activeKeep.id)" class="btn btn-danger">Delete Keep</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -56,15 +59,38 @@
 
 import { computed, reactive, onMounted } from 'vue';
 import { AppState } from '../AppState.js';
+import Pop from '../utils/Pop.js';
+import { useRouter } from 'vue-router';
+import { Modal } from 'bootstrap';
+import { keepsService } from '../services/KeepsService.js'
 
 
 export default {
     setup() {
-
+        const router = useRouter();
 
         return {
             activeKeep: computed(() => AppState.activeKeep),
             vaults: computed(() => AppState.userVaults),
+
+            async destroyKeep(keepId) {
+                try {
+                    const keep = AppState.activeKeep
+                    const confirmDelete = await Pop.confirm(`Are you sure you want to delete ${keep.name}?`)
+                    if (!confirmDelete) {
+                        return
+                    }
+                    await keepsService.destroyKeep(keepId)
+                    Modal.getOrCreateInstance('#staticBackdrop').hide()
+                    Pop.success(`${keep.name} has been deleted`)
+
+                }
+                catch (error) {
+                    Pop.error(error)
+                }
+
+
+            }
         }
     }
 };
