@@ -19,12 +19,17 @@
                         <h3>Vaults</h3>
                         <div v-for="vault in vaults" :key="vault.id" class="">
                             <div class="rounded shadow">
-                                <div class=" d-flex justify-content-between rounded align-items-end p-3 img-fluid"
-                                    type="button"
-                                    :style="{ backgroundImage: `url('${vault.img}')`, backgroundPosition: 'center', backgroundSize: 'cover' }">
-                                    <p class="glass text-light m-0 p-2">
-                                        {{ vault.name }}
-                                    </p>
+                                <div>
+                                    <router-link :to="{ name: 'VaultPage', params: { vaultId: vault.id } }"
+                                        @click="getVaultById(vault.id)">
+                                        <div class=" d-flex justify-content-between rounded
+                                            align-items-end p-3 img-fluid" type="button"
+                                            :style="{ backgroundImage: `url('${vault.img}')`, backgroundPosition: 'center', backgroundSize: 'cover' }">
+                                            <p class="glass text-light m-0 p-2">
+                                                {{ vault.name }}
+                                            </p>
+                                        </div>
+                                    </router-link>
 
                                 </div>
                             </div>
@@ -68,6 +73,8 @@ import { computed, reactive, onMounted, watch } from 'vue';
 import Pop from '../utils/Pop.js';
 import { profilesService } from '../services/ProfilesService.js'
 import { keepsService } from '../services/KeepsService.js';
+import { vaultsService } from '../services/VaultsService.js';
+import { logger } from '../utils/Logger.js';
 
 export default {
     setup() {
@@ -121,7 +128,15 @@ export default {
                 catch (error) {
                     Pop.error(error)
                 }
-            }
+            },
+            getVaultById(vaultId) {
+                try {
+                    vaultsService.getVaultById(vaultId);
+                }
+                catch (error) {
+                    Pop.error(error)
+                }
+            },
         };
     },
 };

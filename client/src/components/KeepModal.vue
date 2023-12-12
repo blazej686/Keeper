@@ -17,7 +17,7 @@
                             <div v-if="activeKeep.id" class="col-6">
                                 <div>
                                     <p>Views {{ activeKeep.views }}</p>
-                                    <p>Kept 0</p>
+                                    <p>Kept {{ activeKeep.kept }}</p>
                                 </div>
                                 <div>
                                     <h4>{{ activeKeep.name }}</h4>
