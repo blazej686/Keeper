@@ -14,7 +14,7 @@
                             <div class="col-6">
                                 <img class="img-fluid" :src="activeKeep.img" alt="Keep Img">
                             </div>
-                            <div class="col-6">
+                            <div v-if="activeKeep.id" class="col-6">
                                 <div>
                                     <p>Views {{ activeKeep.views }}</p>
                                     <p>kept 0</p>
@@ -22,9 +22,13 @@
                                 <div>
                                     <h4>{{ activeKeep.name }}</h4>
                                     <p>{{ activeKeep.description }}</p>
-
-                                    <img class="rounded profile-pic" :src="activeKeep.img" alt="">
-
+                                    <div class="text-end">
+                                        <router-link
+                                            :to="{ name: 'ProfilePage', params: { profileId: activeKeep.creator.id } }">
+                                            <img class="rounded-circle profile-pic" :src="activeKeep.creator.picture"
+                                                alt="">
+                                        </router-link>
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -51,7 +55,7 @@
 <script>
 
 import { computed, reactive, onMounted } from 'vue';
-import { AppState } from '../../AppState.js';
+import { AppState } from '../AppState.js';
 
 
 export default {

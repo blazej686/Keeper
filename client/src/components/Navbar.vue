@@ -12,8 +12,8 @@
           Create<i class="mdi mdi-dropdown"></i>
         </button>
         <div class="dropdown-menu dropdown-menu-start" aria-labelledby="triggerId">
-          <a class="dropdown-item" href="#">Create Keep</a>
-          <a class="dropdown-item" href="#">Create Vault</a>
+          <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createKeepModal">Create Keep</button>
+          <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editKeepModal">Create Vault</button>
         </div>
       </div>
     </div>
