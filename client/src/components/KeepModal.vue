@@ -17,7 +17,7 @@
                             <div v-if="activeKeep.id" class="col-6">
                                 <div>
                                     <p>Views {{ activeKeep.views }}</p>
-                                    <p>kept 0</p>
+                                    <p>Kept 0</p>
                                 </div>
                                 <div>
                                     <h4>{{ activeKeep.name }}</h4>
@@ -25,8 +25,8 @@
                                     <div class="text-end">
                                         <router-link
                                             :to="{ name: 'ProfilePage', params: { profileId: activeKeep.creator.id } }">
-                                            <img class="rounded-circle profile-pic" :src="activeKeep.creator.picture"
-                                                alt="">
+                                            <img class="rounded-circle profile-pic " data-bs-dismiss="modal"
+                                                :src="activeKeep.creator.picture" alt="">
                                         </router-link>
                                     </div>
                                 </div>

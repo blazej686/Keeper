@@ -1,6 +1,7 @@
 <template>
   <div class="about text-center">
     <h1>Welcome {{ account.name }}</h1>
+    <img :src="account.coverImg" alt="">
     <img class="rounded" :src="account.picture" alt="" />
     <p>{{ account.email }}</p>
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editAccountModal">Edit Profile</button>
@@ -71,7 +72,9 @@ import { computed, onMounted, watch } from 'vue';
 import { AppState } from '../AppState';
 import Pop from '../utils/Pop.js';
 import { profilesService } from '../services/ProfilesService.js';
-import EditAccountModal from '../components/EditAccountModal.vue'
+import EditAccountModal from '../components/EditAccountModal.vue';
+import { keepsService } from '../services/KeepsService.js';
+
 
 
 export default {
@@ -83,6 +86,7 @@ export default {
       getProfileKeeps();
       getProfileVaults();
     }, { immediate: true });
+
 
 
     async function getProfileKeeps() {
@@ -105,11 +109,22 @@ export default {
       }
     }
     return {
+      profile: computed(() => AppState.profile),
       account: computed(() => AppState.account),
       activeProfile: computed(() => AppState.profile),
       profileKeeps: computed(() => AppState.keeps),
       vaults: computed(() => AppState.vaults),
       keeps: computed(() => AppState.keeps),
+
+      setActiveKeep(keepId) {
+        try {
+          keepsService.setActiveKeep(keepId);
+
+        }
+        catch (error) {
+          Pop.error(error)
+        }
+      }
     }
   },
   components: { EditAccountModal }

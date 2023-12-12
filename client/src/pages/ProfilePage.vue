@@ -2,6 +2,7 @@
     <div class="container">
         <section class="row">
             <div class="col-6 d-flex justify-content-around">
+                <img :src="activeProfile.coverImg" alt="">
                 <div>
                     <img class="rounded-circle" :src="activeProfile.picture" alt="">
                 </div>
