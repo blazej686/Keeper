@@ -12,38 +12,58 @@
         </section>
         <section class="row">
             <div v-for="keep in keeps" :key="keep.id" class="col-6">
-                <KeepCard :keep="keep" />
+                <div>
+                    <div class="rounded shadow">
+                        <div @click="setActiveKeep(keep.id)"
+                            class=" d-flex justify-content-between rounded align-items-end p-3 img-fluid mdi mdi-delete"
+                            :style="{ backgroundImage: `url('${keep.img}')`, backgroundPosition: 'center', backgroundSize: 'cover' }">
+                            <p class="glass text-light m-0 p-2">
+                                {{ keep.name }}
+                            </p>
+                            <div class=" fs-2 mdi mdi-delete">
+                                <!-- <img class="rounded-circle profile-pic" :src="keep.creator.picture"
+                                    alt="Creator Profile Picture" :title="keep.creator.name"> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
 </template>
+<!-- type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" -->
 
 
 <script>
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { AppState } from '../AppState';
 import { computed, reactive, onMounted, watch } from 'vue';
 import Pop from '../utils/Pop.js';
 import { vaultsService } from '../services/VaultsService.js';
 import { logger } from '../utils/Logger.js';
 import KeepCard from '../components/KeepCard.vue';
-import { router } from '../router.js';
 
 export default {
     setup() {
+        const router = useRouter();
         const route = useRoute();
         const watchableVaultId = computed(() => route.params.vaultId);
         watch(watchableVaultId, () => {
             getVaultById();
             getKeepsByVaultId();
         }, { immediate: true });
+
         async function getVaultById() {
             try {
                 const vaultId = route.params.vaultId;
-                vaultsService.getVaultById(vaultId);
+                await vaultsService.getVaultById(vaultId);
             }
             catch (error) {
-                Pop.error(error);
+                Pop.error(error)
+                if (error.response.data.includes('😡')) {
+                    console.log('do i make it here');
+                    router.push({ name: 'Home' })
+                }
             }
         }
         ;
@@ -83,5 +103,20 @@ export default {
 .hight {
     height: 30%;
 
+}
+
+.profile-pic {
+    object-fit: cover;
+    object-position: center;
+    height: 5vh;
+}
+
+.glass {
+    background: rgba(133, 131, 131, 0.28);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4.4px);
+    -webkit-backdrop-filter: blur(4.4px);
+    border: 1px solid rgba(133, 131, 131, 0.3);
 }
 </style>

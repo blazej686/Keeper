@@ -2,7 +2,7 @@
   <div class="container">
     <section class="row">
       <div class="masonry">
-        <div v-for="keep in keeps" :key="keep.id" class=" col-6 col-md-3 mb-3 boarder rounded w-100">
+        <div v-for="keep in keeps" :key="keep.id" class=" col-6 col-md-4 mb-3 boarder rounded w-100">
           <KeepCard :keep="keep" />
         </div>
       </div>
@@ -49,6 +49,7 @@ export default {
 
 <style scoped lang="scss">
 .masonry {
-  columns: 200px;
+  columns: 400px;
+
 }
 </style>

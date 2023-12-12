@@ -51,6 +51,15 @@ FROM keeps
 JOIN accounts acc ON keeps.creatorId = acc.id
 WHERE keeps.id = @keepId;";
 
+        // SELECT
+        // keeps.*,
+        // COUNT(keeps.id) AS kept,
+        // acc.*
+        // FROM keeps
+        // JOIN accounts acc ON keeps.creatorId = acc.id
+        // LEFT JOIN vaultKeeps vau ON vau.keepId = keeps.id
+        // GROUP BY (keeps.id);";
+
         Keep keep = _db.Query<Keep, Profile, Keep>(sql, KeepBuilder, new { keepId }).FirstOrDefault();
         return keep;
     }

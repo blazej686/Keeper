@@ -28,6 +28,13 @@ class KeepsService {
         AppState.activeKeep = null
     }
 
+    async addKeepToVault(keepId, vaultId) {
+        const res = await api.post('api/vaultkeeps', {
+            "vaultId": vaultId,
+            "keepId": keepId
+        })
+    }
+
 
 }
 export const keepsService = new KeepsService()

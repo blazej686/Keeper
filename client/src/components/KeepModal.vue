@@ -35,13 +35,17 @@
                     </div>
                     <form @submit.prevent="">
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
+                            <button @click="getProfileVaults()" class="btn btn-secondary dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Add to Vault
                             </button>
                             <ul class="dropdown-menu">
-                                <li v-for="vault in vaults" :key="vault.id"><button @click="" class="dropdown-item">{{
-                                    vault.name }}</button></li>
+                                <div>
+                                    <li v-for="vault in vaults" :key="vault.id">
+                                        <button @click="addKeepToVault(vault.id)" class="dropdown-item">{{ vault.name
+                                        }}</button>
+                                    </li>
+                                </div>
                             </ul>
                         </div>
                     </form>
@@ -63,15 +67,17 @@ import Pop from '../utils/Pop.js';
 import { useRouter } from 'vue-router';
 import { Modal } from 'bootstrap';
 import { keepsService } from '../services/KeepsService.js'
+import { profilesService } from '../services/ProfilesService.js';
+import { logger } from '../utils/Logger.js';
 
 
 export default {
     setup() {
-        const router = useRouter();
 
         return {
             activeKeep: computed(() => AppState.activeKeep),
-            vaults: computed(() => AppState.userVaults),
+            vaults: computed(() => AppState.vaults),
+            account: computed(() => AppState.account),
 
             async destroyKeep(keepId) {
                 try {
@@ -88,9 +94,30 @@ export default {
                 catch (error) {
                     Pop.error(error)
                 }
+            },
 
+            async getProfileVaults() {
+                try {
+                    const profileId = AppState.account.id;
+                    await profilesService.getProfileVaults(profileId);
+                }
+                catch (error) {
+                    Pop.error(error);
+                }
+            },
 
+            async addKeepToVault(vaultId) {
+                try {
+                    const keepId = this.activeKeep.id
+                    await keepsService.addKeepToVault(keepId, vaultId)
+                    Pop.success('Keep has been added to the Vault!')
+
+                }
+                catch (error) {
+                    Pop.error(error)
+                }
             }
+
         }
     }
 };

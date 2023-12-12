@@ -20,8 +20,7 @@
                         <div v-for="vault in vaults" :key="vault.id" class="">
                             <div class="rounded shadow">
                                 <div>
-                                    <router-link :to="{ name: 'VaultPage', params: { vaultId: vault.id } }"
-                                        @click="getVaultById(vault.id)">
+                                    <router-link :to="{ name: 'VaultPage', params: { vaultId: vault.id } }">
                                         <div class=" d-flex justify-content-between rounded
                                             align-items-end p-3 img-fluid" type="button"
                                             :style="{ backgroundImage: `url('${vault.img}')`, backgroundPosition: 'center', backgroundSize: 'cover' }">
@@ -124,14 +123,6 @@ export default {
                 try {
                     keepsService.setActiveKeep(keepId);
 
-                }
-                catch (error) {
-                    Pop.error(error)
-                }
-            },
-            getVaultById(vaultId) {
-                try {
-                    vaultsService.getVaultById(vaultId);
                 }
                 catch (error) {
                     Pop.error(error)
