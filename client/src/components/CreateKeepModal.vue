@@ -39,10 +39,16 @@ export default {
         return {
             editable,
             async createKeep() {
-                const keepData = editable.value
-                await keepsService.createKeep(keepData)
-                editable.value = {}
-                Modal.getOrCreateInstance('#createKeepModal').hide()
+                try {
+                    const keepData = editable.value
+                    await keepsService.createKeep(keepData)
+                    editable.value = {}
+                    Modal.getOrCreateInstance('#createKeepModal').hide()
+
+                }
+                catch (error) {
+                    Pop.error(error)
+                }
             }
         }
     }

@@ -40,19 +40,8 @@ export default {
       }
     }
 
-    // async function getVaults() {
-    //   try {
-    //     const userId = account.id
-    //     await vaultsService.getVaults(userId);
-    //   }
-    //   catch (error) {
-    //     Pop.error(error)
-    //   }
-
-    // }
-
     onMounted(() => {
-      // getVaults();
+
 
     });
 
