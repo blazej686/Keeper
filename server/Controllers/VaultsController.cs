@@ -57,7 +57,7 @@ namespace Keeper.Controllers
             try
             {
                 Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
-                List<Keep> keeps = _vaultKeepsService.GetKeepsByVaultId(vaultId, userInfo.Id);
+                List<Keep> keeps = _vaultKeepsService.GetKeepsByVaultId(vaultId, userInfo?.Id);
                 return Ok(keeps);
             }
             catch (Exception e)

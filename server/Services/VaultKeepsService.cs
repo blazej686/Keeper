@@ -17,13 +17,18 @@ namespace Keeper.Services
             _vaultsService = vaultsService;
         }
 
-        internal VaultKeep CreateVaultKeep(VaultKeep vaultKeepsData, string userId)
+        internal VaultKeep CreateVaultKeep(VaultKeep vaultKeepsData, string userId, Vault vaultData)
         {
             VaultKeep vaultKeep = _vaultKeepsRepository.CreateVaultKeep(vaultKeepsData);
-            // if (vaultKeep.CreatorId == userId)
-            // {
-            //     throw new Exception("Please sign-in to create this.");
-            // }
+            if (vaultData.CreatorId != userId)
+            {
+                throw new Exception("You can't save to other vaults.");
+            }
+            if (vaultKeepsData.CreatorId == null)
+            {
+                throw new Exception("Please sign in to save this keep in your vault.");
+            }
+
             return vaultKeep;
         }
 

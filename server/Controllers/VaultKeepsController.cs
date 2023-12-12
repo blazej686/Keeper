@@ -8,11 +8,13 @@ namespace Keeper.Controllers
     {
         private readonly Auth0Provider _auth0Provider;
         private readonly VaultKeepsService _vaultKeepsService;
+        private readonly VaultsService _vaultsService;
 
-        public VaultKeepsController(Auth0Provider auth0Provider, VaultKeepsService vaultKeepsService)
+        public VaultKeepsController(Auth0Provider auth0Provider, VaultKeepsService vaultKeepsService, VaultsService vaultsService)
         {
             _auth0Provider = auth0Provider;
             _vaultKeepsService = vaultKeepsService;
+            _vaultsService = vaultsService;
         }
 
         [Authorize]
@@ -22,8 +24,9 @@ namespace Keeper.Controllers
             try
             {
                 Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+                Vault vaultData = _vaultsService.GetVaultById(vaultKeepsData.VaultId, userInfo.Id);
                 vaultKeepsData.CreatorId = userInfo.Id;
-                VaultKeep vaultKeep = _vaultKeepsService.CreateVaultKeep(vaultKeepsData, userInfo.Id);
+                VaultKeep vaultKeep = _vaultKeepsService.CreateVaultKeep(vaultKeepsData, userInfo.Id, vaultData);
                 return Ok(vaultKeep);
             }
             catch (Exception e)

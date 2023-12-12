@@ -70,6 +70,8 @@ namespace Keeper.Repositories
         private Keep VaultKeepBuilder(Keep vaultKeep, Profile profile)
         {
             vaultKeep.Creator = profile;
+
+            vaultKeep.VaultKeepId = vaultKeep.Id;
             return vaultKeep;
         }
 

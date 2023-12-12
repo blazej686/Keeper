@@ -23,13 +23,6 @@ export default {
   components: { KeepCard },
 
   setup() {
-    const watchable = computed(() => AppState.keeps);
-
-    watch(watchable, () => {
-      getKeeps();
-
-    }, { immediate: true })
-
 
     async function getKeeps() {
       try {
@@ -41,7 +34,7 @@ export default {
     }
 
     onMounted(() => {
-
+      getKeeps();
 
     });
 
