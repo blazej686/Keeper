@@ -14,15 +14,13 @@
             <div v-for="keep in keeps" :key="keep.id" class="col-6">
                 <div>
                     <div class="rounded shadow">
-                        <div @click="setActiveKeep(keep.id)"
-                            class=" d-flex justify-content-between rounded align-items-end p-3 img-fluid mdi mdi-delete"
+                        <!-- @click="setActiveKeep(keep.id) -->
+                        <div class=" d-flex justify-content-between rounded align-items-end p-3 img-fluid"
                             :style="{ backgroundImage: `url('${keep.img}')`, backgroundPosition: 'center', backgroundSize: 'cover' }">
                             <p class="glass text-light m-0 p-2">
                                 {{ keep.name }}
                             </p>
-                            <div class=" fs-2 mdi mdi-delete">
-                                <!-- <img class="rounded-circle profile-pic" :src="keep.creator.picture"
-                                    alt="Creator Profile Picture" :title="keep.creator.name"> -->
+                            <div class=" fs-2 mdi mdi-delete" @click="removeKeep(keep.id)">
                             </div>
                         </div>
                     </div>
@@ -31,7 +29,6 @@
         </section>
     </div>
 </template>
-<!-- type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" -->
 
 
 <script>
@@ -42,6 +39,7 @@ import Pop from '../utils/Pop.js';
 import { vaultsService } from '../services/VaultsService.js';
 import { logger } from '../utils/Logger.js';
 import KeepCard from '../components/KeepCard.vue';
+import { keepsService } from '../services/KeepsService.js';
 
 export default {
     setup() {
@@ -74,6 +72,7 @@ export default {
         return {
             vault: computed(() => AppState.activeVault),
             keeps: computed(() => AppState.keeps),
+            activeKeep: computed(() => AppState.activeKeep),
 
             async destroyVault(vaultId) {
                 try {
@@ -86,6 +85,21 @@ export default {
                     router.push({ name: 'Home' });
                     Pop.success(`${vault.name} has been deleted`)
 
+                }
+                catch (error) {
+                    Pop.error(error)
+                }
+
+            },
+
+            async removeKeep(keepId) {
+                try {
+
+                    const foundKeep = AppState.keeps.find(keep => keep.id == keepId)
+                    logger.log(foundKeep)
+                    const vaultKeepId = foundKeep.vaultKeepId
+                    logger.log('vaultKeep Id', vaultKeepId)
+                    await vaultsService.removeVaultKeepById(vaultKeepId)
                 }
                 catch (error) {
                     Pop.error(error)

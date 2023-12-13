@@ -41,7 +41,7 @@ namespace Keeper.Repositories
             JOIN accounts acc ON acc.id = vau.creatorId
             WHERE vau.vaultId = @vaultId;";
 
-            List<Keep> vaultKeeps = _dbConnection.Query<Keep, Profile, Keep>(sql, VaultKeepBuilder, new { vaultId }).ToList();
+            List<Keep> vaultKeeps = _dbConnection.Query<VaultKeep, Keep, Profile, Keep>(sql, VaultKeepBuilder, new { vaultId }).ToList();
             return vaultKeeps;
         }
         internal void DestroyVaultKeep(int vaultKeepId)
@@ -70,12 +70,13 @@ namespace Keeper.Repositories
             return vaultKeep;
         }
 
-        private Keep VaultKeepBuilder(Keep vaultKeep, Profile profile)
+        private Keep VaultKeepBuilder(VaultKeep vaultKeep, Keep keep, Profile profile)
         {
-            vaultKeep.Creator = profile;
+            keep.Creator = profile;
 
-            vaultKeep.VaultKeepId = vaultKeep.Id;
-            return vaultKeep;
+            keep.VaultKeepId = vaultKeep.Id;
+
+            return keep;
         }
 
 

@@ -56,12 +56,6 @@ WHERE keeps.id = LAST_INSERT_ID();";
         GROUP BY (keeps.id);";
 
 
-        // SELECT
-        // keeps.*,
-        // acc.*
-        // FROM keeps
-        // JOIN accounts acc ON keeps.creatorId = acc.id
-        // WHERE keeps.id = @keepId;";
 
 
         Keep keep = _db.Query<Keep, Profile, Keep>(sql, KeepBuilder, new { keepId }).FirstOrDefault();
@@ -120,6 +114,7 @@ WHERE keeps.id = @Id;";
     private Keep KeepBuilder(Keep keep, Profile profile)
     {
         keep.Creator = profile;
+
         return keep;
     }
 }
