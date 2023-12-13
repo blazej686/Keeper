@@ -43,3 +43,12 @@ CREATE TABLE
         vaultId INT NOT NULL,
         keepId INT NOT NULL
     ) default charset utf8 COMMENT '';
+
+SELECT
+    keeps.*,
+    COUNT(vau.id) AS kept,
+    acc.*
+FROM keeps
+    JOIN accounts acc ON acc.id = keeps.creatorId
+    LEFT JOIN vaultKeeps vau ON vau.keepId = keeps.id -- WHERE keeps.id = @keepId
+GROUP BY (keeps.id)

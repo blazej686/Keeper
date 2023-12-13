@@ -44,21 +44,25 @@ WHERE keeps.id = LAST_INSERT_ID();";
     internal Keep GetKeepById(int keepId)
     {
         string sql = @"
-SELECT
-keeps.*,
-acc.*
-FROM keeps
-JOIN accounts acc ON keeps.creatorId = acc.id
-WHERE keeps.id = @keepId;";
+
+        SELECT
+        keeps.*,
+        COUNT(vau.id) AS kept,
+        acc.*
+        FROM keeps
+        JOIN accounts acc ON acc.id = keeps.creatorId
+        LEFT JOIN vaultKeeps vau ON vau.keepId = keeps.id
+        WHERE keeps.id = @keepId
+        GROUP BY (keeps.id);";
+
 
         // SELECT
         // keeps.*,
-        // COUNT(keeps.id) AS kept,
         // acc.*
         // FROM keeps
         // JOIN accounts acc ON keeps.creatorId = acc.id
-        // LEFT JOIN vaultKeeps vau ON vau.keepId = keeps.id
-        // GROUP BY (keeps.id);";
+        // WHERE keeps.id = @keepId;";
+
 
         Keep keep = _db.Query<Keep, Profile, Keep>(sql, KeepBuilder, new { keepId }).FirstOrDefault();
         return keep;

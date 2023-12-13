@@ -59,6 +59,9 @@ namespace Keeper.Repositories
             FROM vaultKeeps vau
             JOIN accounts acc ON acc.id = vau.CreatorId
             WHERE vau.id = @vaultKeepId;";
+
+
+
             VaultKeep vaultKeep = _dbConnection.Query<VaultKeep, Profile, VaultKeep>(sql, (vaultKeep, profile) =>
             {
                 vaultKeep.Creator = profile;
