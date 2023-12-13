@@ -51,6 +51,5 @@ export default {
 .masonry {
   columns: 400px;
 
-
 }
 </style>

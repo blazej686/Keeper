@@ -33,7 +33,7 @@
                             </div>
                         </section>
                     </div>
-                    <form @submit.prevent="">
+                    <form v-if="account.id" @submit.prevent="">
                         <div class="dropdown">
                             <button @click="getProfileVaults()" class="btn btn-secondary dropdown-toggle mt-3" type="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -111,7 +111,9 @@ export default {
                 try {
                     const keepId = this.activeKeep.id
                     await keepsService.addKeepToVault(keepId, vaultId)
+                    AppState.activeKeep.kept++
                     Pop.success('Keep has been added to the Vault!')
+
 
                 }
                 catch (error) {

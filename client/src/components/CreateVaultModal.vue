@@ -11,12 +11,14 @@
                     <form @submit.prevent="createVault">
                         <div class="mb-3">
                             <label for="createName" class="form-label">Name</label>
-                            <input v-model="editable.name" type="text" class="form-control" id="createName" required>
+                            <input v-model="editable.name" type="text" class="form-control" id="createName" required
+                                maxlength="255">
                             <label for="createDescription" class="form-label">Description</label>
                             <input v-model="editable.description" type="text" class="form-control" id="createDescription"
-                                required>
+                                required maxlength="500">
                             <label for="createImg" class="form-label">Img</label>
-                            <input v-model="editable.Img" type="url" class="form-control" id="createImg" required>
+                            <input v-model="editable.Img" type="url" class="form-control" id="createImg" required
+                                maxlength="500">
                         </div>
                         <div class="mb-3 form-check">
                             <input v-model="editable.isPrivate" type="checkbox" class="form-check-input" id="isPrivate">

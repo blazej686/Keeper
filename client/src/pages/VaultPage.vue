@@ -8,7 +8,8 @@
                 <div>
                     <h2>{{ vault.name }}</h2>
                     <p>By {{ vault.creator?.name }}</p>
-                    <button @click="destroyVault(vault.id)" class="btn btn-danger">Delete Vault</button>
+                    <button v-if="account.id == vault.creatorId" @click="destroyVault(vault.id)"
+                        class="btn btn-danger">Delete Vault</button>
 
                 </div>
             </div>
@@ -23,8 +24,8 @@
                             <p class="glass text-light m-0 p-2">
                                 {{ keep.name }}
                             </p>
-                            <div class=" fs-2 mdi mdi-delete text-danger" title="Delete Keep from Vault"
-                                @click="removeKeep(keep.id)">
+                            <div v-if="account.id == vault.creatorId" class=" fs-2 mdi mdi-delete text-danger"
+                                title="Delete Keep from Vault" @click="removeKeep(keep.id)" role="button">
                             </div>
                         </div>
                     </div>
@@ -77,6 +78,7 @@ export default {
             vault: computed(() => AppState.activeVault),
             keeps: computed(() => AppState.keeps),
             activeKeep: computed(() => AppState.activeKeep),
+            account: computed(() => AppState.account),
 
             async destroyVault(vaultId) {
                 try {
@@ -99,10 +101,12 @@ export default {
             async removeKeep(keepId) {
                 try {
 
+                    const confirmDelete = await Pop.confirm(`Are you sure you want to delete?`)
+                    if (!confirmDelete) {
+                        return
+                    }
                     const foundKeep = AppState.keeps.find(keep => keep.id == keepId)
-                    logger.log(foundKeep)
                     const vaultKeepId = foundKeep.vaultKeepId
-                    logger.log('vaultKeep Id', vaultKeepId)
                     await vaultsService.removeVaultKeepById(vaultKeepId)
                 }
                 catch (error) {

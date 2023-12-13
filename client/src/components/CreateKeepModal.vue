@@ -11,12 +11,13 @@
                     <form @submit.prevent="createKeep">
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input v-model="editable.name" type="text" class="form-control" id="name" required>
+                            <input v-model="editable.name" type="text" class="form-control" id="name" required
+                                maxlength="255">
                             <label for="description" class="form-label">Description</label>
-                            <input v-model="editable.description" type="text" class="form-control" id="description"
-                                required>
+                            <input v-model="editable.description" type="text" class="form-control" id="description" required
+                                maxlength="500">
                             <label for="Img" class="form-label">Img</label>
-                            <input v-model="editable.Img" type="url" class="form-control" id="Img" required>
+                            <input v-model="editable.Img" type="url" class="form-control" id="Img" required maxlength="500">
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

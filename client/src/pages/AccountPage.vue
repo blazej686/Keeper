@@ -19,7 +19,7 @@
       </div>
     </section>
     <section class="row">
-      <h3>Vaults</h3>
+      <h2>Vaults</h2>
       <div v-for="vault in vaults" :key="vault.id" class="mb-3 col-6 col-md-3">
         <div class="rounded shadow">
           <router-link :to="{ name: 'VaultPage', params: { vaultId: vault.id } }">
@@ -37,7 +37,7 @@
     </section>
     <section class="row">
 
-      <h3>Keeps</h3>
+      <h2>Keeps</h2>
       <div v-for="keep in keeps" :key="keep.id" class="mb-3 col-6 col-md-3">
         <div class="rounded shadow">
           <div @click="setActiveKeep(keep.id)"

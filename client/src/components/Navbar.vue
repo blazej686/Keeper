@@ -8,8 +8,9 @@
           </div>
         </router-link>
         <div>
-          <button v-if="account.id" class="btn btn-secondary text-light lighten-30 dropdown-toggle" type="button"
-            id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button v-if="account.id && route.name == 'Home'"
+            class="btn btn-secondary text-light lighten-30 dropdown-toggle" type="button" id="triggerId"
+            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Create<i class="mdi mdi-dropdown"></i>
           </button>
           <div class="dropdown-menu dropdown-menu-start" aria-labelledby="triggerId">

@@ -12,13 +12,13 @@
                         <div class="mb-3">
                             <label for="accountName" class="form-label">Name</label>
                             <input v-model="editable.name" type="text" class="form-control" id="accountName"
-                                aria-describedby="name">
+                                aria-describedby="name" maxlength="255">
                             <label for="profilePicture" class="form-label">Profile Picture</label>
                             <input v-model="editable.Picture" type="url" class="form-control" id="profilePicture"
-                                aria-describedby="profilePicture">
+                                aria-describedby="profilePicture" maxlength="255">
                             <label for="coverImg" class="form-label">Cover Image</label>
                             <input v-model="editable.coverImg" type="url" class="form-control" id="coverImg"
-                                aria-describedby="coverImg">
+                                aria-describedby="coverImg" maxlength="255">
                         </div>
                         <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
                     </form>

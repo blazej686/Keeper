@@ -5,11 +5,10 @@
   <main>
     <router-view />
   </main>
-  <footer>
-    <KeepModal />
-    <CreateKeepModal />
-    <CreateVaultModal />
-  </footer>
+
+  <KeepModal />
+  <CreateKeepModal />
+  <CreateVaultModal />
 </template>
 
 <script>
