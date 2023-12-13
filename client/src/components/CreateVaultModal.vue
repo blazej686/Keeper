@@ -1,6 +1,5 @@
 <template>
-    <div class="modal fade" id="createVaultModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="editKeepModalLabel" aria-hidden="true">
+    <div class="modal fade" id="createVaultModal" tabindex="-1" aria-labelledby="editKeepModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -18,7 +17,7 @@
                                 required maxlength="500">
                             <label for="createImg" class="form-label">Img</label>
                             <input v-model="editable.Img" type="url" class="form-control" id="createImg" required
-                                maxlength="500">
+                                maxlength="1000">
                         </div>
                         <div class="mb-3 form-check">
                             <input v-model="editable.isPrivate" type="checkbox" class="form-check-input" id="isPrivate">

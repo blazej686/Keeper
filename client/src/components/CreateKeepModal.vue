@@ -1,6 +1,5 @@
 <template>
-    <div class="modal fade" id="createKeepModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="createKeepModalLabel" aria-hidden="true">
+    <div class="modal fade" id="createKeepModal" tabindex="-1" aria-labelledby="createKeepModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -17,7 +16,8 @@
                             <input v-model="editable.description" type="text" class="form-control" id="description" required
                                 maxlength="500">
                             <label for="Img" class="form-label">Img</label>
-                            <input v-model="editable.Img" type="url" class="form-control" id="Img" required maxlength="500">
+                            <input v-model="editable.Img" type="url" class="form-control" id="Img" required
+                                maxlength="1000">
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

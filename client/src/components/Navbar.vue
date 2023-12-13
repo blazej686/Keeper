@@ -7,7 +7,7 @@
             <img alt="logo" src="../assets/img/keeper-logo.png" height="45" />
           </div>
         </router-link>
-        <div>
+        <div class=" d-flex align-items-center">
           <button v-if="account.id && route.name == 'Home'"
             class="btn btn-secondary text-light lighten-30 dropdown-toggle" type="button" id="triggerId"
             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
