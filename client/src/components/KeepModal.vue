@@ -35,7 +35,7 @@
                     </div>
                     <form @submit.prevent="">
                         <div class="dropdown">
-                            <button @click="getProfileVaults()" class="btn btn-secondary dropdown-toggle" type="button"
+                            <button @click="getProfileVaults()" class="btn btn-secondary dropdown-toggle mt-3" type="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Add to Vault
                             </button>
@@ -50,7 +50,8 @@
                         </div>
                     </form>
                     <div class="text-end">
-                        <button @click="destroyKeep(activeKeep.id)" class="btn btn-danger">Delete Keep</button>
+                        <button v-if="account.id == activeKeep.creatorId" @click="destroyKeep(activeKeep.id)"
+                            class="btn btn-danger">Delete Keep</button>
                     </div>
                 </div>
             </div>

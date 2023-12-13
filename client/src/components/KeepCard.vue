@@ -54,7 +54,7 @@ export default {
 }
 
 .glass {
-    background: rgba(133, 131, 131, 0.28);
+    background: rgba(133, 131, 131, 0.45);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(4.4px);
