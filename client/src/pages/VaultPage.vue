@@ -24,8 +24,9 @@
                             <p class="glass text-light m-0 p-2">
                                 {{ keep.name }}
                             </p>
+                            <!-- FIXME MAKE SURE TO SEND DOWN THE VAULT KEEP ID AND NOT THE KEEP.ID -->
                             <div v-if="account.id == vault.creatorId" class=" fs-2 mdi mdi-delete text-danger"
-                                title="Delete Keep from Vault" @click="removeKeep(keep.id)" role="button">
+                                title="Delete Keep from Vault" @click="removeKeep(keep.vaultKeepId)" role="button">
                             </div>
                         </div>
                     </div>
@@ -98,15 +99,14 @@ export default {
 
             },
 
-            async removeKeep(keepId) {
+            async removeKeep(vaultKeepId) {
                 try {
 
                     const confirmDelete = await Pop.confirm(`Are you sure you want to delete?`)
                     if (!confirmDelete) {
                         return
                     }
-                    const foundKeep = AppState.keeps.find(keep => keep.id == keepId)
-                    const vaultKeepId = foundKeep.vaultKeepId
+
                     await vaultsService.removeVaultKeepById(vaultKeepId)
                 }
                 catch (error) {
