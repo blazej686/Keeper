@@ -11,7 +11,7 @@
                         </div>
                         <section class="row">
                             <div class="col-6">
-                                <img class="img-fluid" :src="activeKeep.img" alt="Keep Img">
+                                <img class="img-fluid" :src="activeKeep.img" alt="Keep Img" :title="activeKeep.name">
                             </div>
                             <div v-if="activeKeep.id" class="col-6">
                                 <div>
@@ -25,7 +25,7 @@
                                         <router-link
                                             :to="{ name: 'ProfilePage', params: { profileId: activeKeep.creator.id } }">
                                             <img class="rounded-circle profile-pic " data-bs-dismiss="modal"
-                                                :src="activeKeep.creator.picture" alt="">
+                                                :title="activeKeep.creator.name" :src="activeKeep.creator.picture" alt="">
                                         </router-link>
                                     </div>
                                 </div>
