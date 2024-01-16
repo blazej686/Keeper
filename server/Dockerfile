@@ -16,7 +16,7 @@ COPY client ./
 # Build the client-side code
 RUN npm run build
 
-FROM mcr.microsoft.com/dotnet//sdk:8.0-alpine-amd64 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine-amd64 AS build-env
 
 WORKDIR /app/server
 
