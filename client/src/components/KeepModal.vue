@@ -48,7 +48,7 @@
                             </ul>
                         </div>
                     </form>
-                    <div class="text-end">
+                    <div v-if="account.id" class="text-end">
                         <button v-if="account.id == activeKeep.creatorId" @click="destroyKeep(activeKeep.id)"
                             class="btn btn-danger">Delete Keep</button>
                     </div>

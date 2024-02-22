@@ -7,18 +7,21 @@ import { api } from "./AxiosService.js"
 
 class ProfilesService {
     async getProfileById(profileId) {
+        AppState.profile = {}
         const res = await api.get(`api/profiles/${profileId}`)
         const newProfile = new Profile(res.data)
         AppState.profile = newProfile
     }
 
     async getProfileKeeps(profileId) {
+        AppState.keeps = []
         const res = await api.get(`api/profiles/${profileId}/keeps`)
         const newKeeps = res.data.map(pojo => new Keep(pojo))
         AppState.keeps = newKeeps
     }
 
     async getProfileVaults(profileId) {
+        AppState.vaults = []
         const res = await api.get(`api/profiles/${profileId}/vaults`)
         const newVaults = res.data.map(pojo => new Vault(pojo))
         AppState.vaults = newVaults
