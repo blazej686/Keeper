@@ -16,15 +16,14 @@
         </section>
         <section class="row ">
             <p class="fs-3">Keeps</p>
-            <div v-for="keep in keeps" :key="keep.id" class="col-6 mb-3">
+            <div v-for="keep in  keeps " :key="keep.id" class="col-4 mb-3">
                 <div>
                     <div class="rounded shadow">
                         <div class=" d-flex justify-content-between rounded align-items-end p-3 img-fluid"
-                            :style="{ backgroundImage: `url('${keep.img}')`, backgroundPosition: 'center', backgroundSize: 'cover' }">
+                            :style="{ backgroundImage: `url('${keep.img}')`, backgroundPosition: 'center', backgroundSize: 'cover', minHeight: '25dvh' }">
                             <p class="glass text-light m-0 p-2">
                                 {{ keep.name }}
                             </p>
-                            <!-- FIXME MAKE SURE TO SEND DOWN THE VAULT KEEP ID AND NOT THE KEEP.ID -->
                             <div v-if="account.id == vault.creatorId" class=" fs-2 mdi mdi-delete text-danger"
                                 title="Delete Keep from Vault" @click="removeKeep(keep.vaultKeepId)" role="button">
                             </div>
