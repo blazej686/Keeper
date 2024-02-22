@@ -1,7 +1,7 @@
 <template>
     <div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content bg-dark">
 
                 <div class="modal-body">
                     <div class="container-fluid">
